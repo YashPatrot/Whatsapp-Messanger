@@ -2,24 +2,34 @@ import { Injectable } from '@nestjs/common';
 import { Twilio } from 'twilio';
 import { ConfigService } from '@nestjs/config';
 import { ENV_VARIABLES } from 'src/common/constants';
+import { MailService } from '@sendgrid/mail';
 
 @Injectable()
 export class TwilioService {
   private readonly twilio: Twilio;
+  private readonly twilioSendGrid: MailService;
   private readonly twilioAccountSid: string;
   private readonly twilioAuthToken: string;
+  private readonly twilioSendGridApiKey: string;
   // private readonly twilioPhoneNumber: string;
   // private readonly twilioWhatsappNumber: string;
   constructor(private readonly configService: ConfigService) {
-    //@ts-expect-error by default it is assigner a type of string | undefined
+    //@ts-expect-error by default it is assigned a type of string | undefined
     this.twilioAccountSid = this.configService.get(
       ENV_VARIABLES.TWILIO_LIVE_ACCESS_CREDENTIALS.TWILIO_ACCOUNT_SID,
     );
 
-    //@ts-expect-error by default it is assigner a type of string | undefined'
+    //@ts-expect-error by default it is assigned a type of string | undefined'
     this.twilioAuthToken = this.configService.get(
       ENV_VARIABLES.TWILIO_LIVE_ACCESS_CREDENTIALS.TWILIO_AUTH_TOKEN,
     );
+
+    //@ts-expect-error by default it is assigned a type of string | undefined'
+    this.twilioSendGridApiKey = this.configService.get(
+      ENV_VARIABLES.TWILIO_LIVE_ACCESS_CREDENTIALS.TWILIO_SENDGRID_API_KEY,
+    );
+    this.twilioSendGrid = new MailService();
+    this.twilioSendGrid.setApiKey(this.twilioSendGridApiKey);
     // //@ts-expect-error by default it is assigner a type of string | undefined'
     // this.twilioPhoneNumber = this.configService.get(
     //   ENV_VARIABLES.TWILIO_LIVE.TWILIO_PHONE_NUMBER,
@@ -29,6 +39,7 @@ export class TwilioService {
     //   ENV_VARIABLES.TWILIO_LIVE.TWILIO_WHATSAPP_NUMBER,
     // );
     this.twilio = new Twilio(this.twilioAccountSid, this.twilioAuthToken);
+    // this.sendEmail();
   }
 
   // async sendSms(
@@ -97,5 +108,17 @@ export class TwilioService {
   //     message: 'Call initiated successfully',
   //     data: call,
   //   };
+  // }
+
+  // async sendEmail() {
+  //   const msg = {
+  //     to: 'yypatrot@mailinator.com', // Change to your recipient
+  //     from: 'yashpatrot@mailinator.com', // Change to your verified sender
+  //     subject: 'Sending with SendGrid is Fun',
+  //     text: 'and easy to do anywhere, even with Node.js',
+  //     html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+  //   };
+  //   const response = await this.twilioSendGrid.send(msg);
+ 
   // }
 }
