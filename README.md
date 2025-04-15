@@ -1,106 +1,151 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 📡 Communication Integrations
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A **NestJS**-based backend service that integrates multiple **Twilio communication channels** including SMS, WhatsApp, voice calls, and email (via SendGrid). Designed for scalable, modular use in microservices or monolithic applications.
 
-<p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-<p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-<a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-<a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-<a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
+---
 
-## Description
+## 🚀 Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- 📩 **SMS Messaging** via Twilio
+- 💬 **WhatsApp Messaging** via Twilio Business API
+- 📞 **Voice Calls** through Twilio's programmable voice service
+- 📧 **Email** sending using Twilio SendGrid
+- 🛠️ **Modular Design** for easy extension
+- 🗃️ **Prisma ORM** integration for structured database operations
 
-## Project setup
+---
 
+## 📦 Tech Stack
+
+- **Backend Framework**: NestJS
+- **Language**: TypeScript
+- **Database ORM**: Prisma
+- **Database**: PostgreSQL (or compatible via Prisma)
+- **Email Provider**: SendGrid (via Twilio)
+- **Cloud Messaging**: Twilio (SMS, WhatsApp, Calls)
+
+---
+
+## 🛠️ Setup & Installation
+
+### 1. Clone the repository
 ```bash
-$ npm install
+git clone https://github.com/YashPatrot/communication-integrations.git
+cd communication-integrations
 ```
 
-## Compile and run the project
-
+### 2. Install dependencies
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Run tests
+### 3. Environment variables
 
-```bash
-# unit tests
-$ npm run test
+Create a `.env` file using `.env.example` as a reference:
 
-# e2e tests
-$ npm run test:e2e
+```dotenv
+# Database
+DATABASE_URL="postgresql://username:password@localhost:5432/dbname?schema=public"
 
-# test coverage
-$ npm run test:cov
+# Twilio credentials
+TWILIO_ACCOUNT_SID=your_account_sid
+TWILIO_AUTH_TOKEN=your_auth_token
+TWILIO_PHONE_NUMBER=your_twilio_number
+TWILIO_WHATSAPP_NUMBER=your_twilio_whatsapp_number
+
+# SendGrid credentials
+TWILIO_SENDGRID_API_KEY=your_sendgrid_api_key
+TWILIO_SENDER_EMAIL=your_sender_email
+TWILIO_REPLY_TO_EMAIL=your_reply_to_email
+
+# Server
+PORT=3000
 ```
 
-## Execute REPL
-
-NestJS provides a REPL (Read-Eval-Print Loop) to interact with your application directly from the terminal. You can use it to run functions and debug your application.
-
+### 4. Generate Prisma client
 ```bash
-$ npm run start:repl
+npx prisma generate
 ```
 
-Once the REPL is running, you can execute functions and inspect your application in real-time.
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+### 5. Run DB migrations
 ```bash
-$ npm install -g mau
-$ mau deploy
+npx prisma migrate dev
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 6. Start the application
+```bash
+npm run start:dev
+```
 
-## Resources
+---
 
-Check out a few resources that may come in handy when working with NestJS:
+## 🧭 Project Structure
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```
+src/
+├── app.module.ts        # Main module
+├── main.ts              # Entry point
+├── prisma/              # Prisma client and service
+├── common/              # Shared constants and utilities
+├── twilio/              # Core Twilio wrapper
+├── twilio-sms/          # SMS handling
+├── twilio-wsms/         # WhatsApp messaging
+├── twilio-call/         # Voice call handling
+├── twilio-email/        # SendGrid email service
+prisma/
+├── schema.prisma        # Data models
+└── migrations/          # Migration history
+.env.example             # Environment config sample
+```
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 📡 API Endpoints
 
-## Stay in touch
+All endpoints accept JSON payloads via `POST`.
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+| Endpoint            | Description                 |
+|---------------------|-----------------------------|
+| `/twilio-sms`       | Send SMS via Twilio         |
+| `/twilio-wsms`      | Send WhatsApp message       |
+| `/twilio-call`      | Make a phone call           |
+| `/twilio-email`     | Send email via SendGrid     |
 
-## License
+---
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## 🧪 Testing
+
+```bash
+# Unit tests
+npm run test
+
+# End-to-end tests
+npm run test:e2e
+```
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions!
+
+1. Fork this repo
+2. Create a branch: `git checkout -b feature/awesome-feature`
+3. Commit your work: `git commit -m 'Add some awesome feature'`
+4. Push to your fork: `git push origin feature/awesome-feature`
+5. Open a Pull Request 🚀
+
+---
+
+## 📜 License
+
+This project is licensed under the [MIT License](./LICENSE).
+
+---
+
+## 🙏 Acknowledgements
+
+- [NestJS](https://nestjs.com/)
+- [Twilio](https://www.twilio.com/)
+- [SendGrid](https://sendgrid.com/)
+- [Prisma](https://www.prisma.io/)
