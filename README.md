@@ -1,3 +1,4 @@
+![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/YashPatrot/communication-integrations?utm_source=oss&utm_medium=github&utm_campaign=YashPatrot%2Fcommunication-integrations&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
 # 📡 Communication Integrations
 
 A **NestJS**-based backend service that integrates multiple **Twilio communication channels** including SMS, WhatsApp, voice calls, and email (via SendGrid). Designed for scalable, modular use in microservices or monolithic applications.
